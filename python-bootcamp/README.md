@@ -39,7 +39,12 @@ Do not edit them.
 | 1 | @NewFace819 | `newface819` | binary search | Member 2 |
 | 2 | @… | `…` | insertion sort | Member 3 |
 | 3 | @… | `…` | matrix transpose | Member 4 |
-| 4 | @… | `…` | sieve of Eratosthenes | Member 1 |
+| 4 | @… | `…` | sieve of Eratosthenes | Member 5 |
+| 5 | @… | `…` | greatest common divisor (Euclid) | Member 1 |
+
+We have five members, so Member 5 gets an extra W1-4 variant (allowed for teams with more than four
+members). The instructor's tests only cover variants 1–4, so Member 5 also writes at least three tests
+for `gcd` in `members/<folder>/w1/test_translate.py`.
 
 ## Rules
 
@@ -67,7 +72,7 @@ The tests import `members.<your_folder>.w1.<module>`, so these names must match 
 | W1-1 | `grades.py` | `summary(scores)` |
 | W1-2 | `text_tools.py` | `word_count(text)`, `top_k(text, k)` |
 | W1-3 | `rules.py` | `can_register_thesis(credits, gpa)`, `missing(credits, gpa)` |
-| W1-4 | `translate.py` | Member 1 `binary_search(a, key)`, 2 `insertion_sort(xs)`, 3 `transpose(m)`, 4 `primes_up_to(n)` — plus a docstring |
+| W1-4 | `translate.py` | Member 1 `binary_search(a, key)`, 2 `insertion_sort(xs)`, 3 `transpose(m)`, 4 `primes_up_to(n)`, 5 `gcd(a, b)` — plus a docstring |
 | W1-5 | `timetable.py` | `by_day(pairs)` |
 
 ## How to run the tests
@@ -83,6 +88,13 @@ Test your own folder while you work. Without `--member` every test is skipped, a
 
 ```bash
 pytest -q python-bootcamp/tests/test_w1.py --member <your_folder> --variant <your_number>
+```
+
+Member 5: the instructor's W1-4 test has no variant 5, so skip it and run your own tests instead:
+
+```bash
+pytest -q python-bootcamp/tests/test_w1.py --member <your_folder> --variant 5 -k "not test_w1_4"
+pytest -q python-bootcamp/members/<your_folder>/w1
 ```
 
 Run what CI runs before you push:
