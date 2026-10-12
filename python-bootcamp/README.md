@@ -21,10 +21,16 @@ python-bootcamp/
 ├── shared/            # team code (T-W2, T-W3)
 │   ├── contract.py
 │   └── study_planner/
+├── samples/           # sample data provided by the instructor
+│   └── tasks.csv  tasks_bad.csv
 └── tests/             # tests provided by the instructor
     ├── conftest.py
     └── test_w1.py  test_w2.py  test_w3.py
 ```
+
+`tests/` and `samples/` are copied unchanged from the instructor's
+[public_materials/python-bootcamp](https://github.com/CSC10014-at-fit-hcmus/public_materials/tree/main/python-bootcamp).
+Do not edit them.
 
 ## Team
 
@@ -52,6 +58,18 @@ python-bootcamp/
    error message; if you keep any AI-generated code, say so in the PR's "AI use" section and in
    `docs/ai-use-log.md`. You must be able to explain every line.
 
+## Week 1 file and function names
+
+The tests import `members.<your_folder>.w1.<module>`, so these names must match exactly.
+
+| Exercise | File in `members/<your_folder>/w1/` | Functions |
+|----------|-------------------------------------|-----------|
+| W1-1 | `grades.py` | `summary(scores)` |
+| W1-2 | `text_tools.py` | `word_count(text)`, `top_k(text, k)` |
+| W1-3 | `rules.py` | `can_register_thesis(credits, gpa)`, `missing(credits, gpa)` |
+| W1-4 | `translate.py` | Member 1 `binary_search(a, key)`, 2 `insertion_sort(xs)`, 3 `transpose(m)`, 4 `primes_up_to(n)` — plus a docstring |
+| W1-5 | `timetable.py` | `by_day(pairs)` |
+
 ## How to run the tests
 
 Install the tools once:
@@ -60,7 +78,8 @@ Install the tools once:
 pip install pytest ruff
 ```
 
-Test your own folder while you work (`--variant` is your member number, used by W1-4):
+Test your own folder while you work. Without `--member` every test is skipped, and `--variant`
+(your member number, used by W1-4) defaults to 1:
 
 ```bash
 pytest -q python-bootcamp/tests/test_w1.py --member <your_folder> --variant <your_number>
