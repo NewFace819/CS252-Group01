@@ -1,4 +1,8 @@
 def word_count(text):
+    """
+    Count how many times each word appears in text.
+    Words are lower-cased and the punctuation .,!?;: is ignored.
+    """
     text = text.lower()
     for c in ['.', ',', '!', '?', ';', ':']:
         text = text.replace(c, "")
@@ -14,6 +18,10 @@ def word_count(text):
 
 
 def top_k(text, k):
+    """
+    Return the k most frequent words in text as (word, count) pairs.
+    Words with the same count are sorted alphabetically.
+    """
     d = word_count(text)
     ans = sorted(d.items(), key=lambda x: (-x[1], x[0]))
     return ans[:k]

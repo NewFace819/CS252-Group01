@@ -1,4 +1,8 @@
 def summary(score: list[float]) -> dict:
+    """
+    Return the min, max, mean and median of the scores.
+    Mean and median are rounded to 2 decimals. Raise ValueError if score is empty.
+    """
     if(len(score) == 0):
         raise ValueError
     score.sort()
