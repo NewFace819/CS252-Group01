@@ -3,7 +3,7 @@ def word_count(text):
     for c in ['.', ',', '!', '?', ';', ':']:
         text = text.replace(c, "")
     d = text.split()
-    ans = dict()
+    ans = {}
     for word in d:
         if word in ans:
             ans[word] += 1

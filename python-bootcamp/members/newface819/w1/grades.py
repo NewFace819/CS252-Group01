@@ -2,7 +2,7 @@ def summary(score: list[float]) -> dict:
     if(len(score) == 0):
         raise ValueError
     score.sort()
-    d = dict()
+    d = {}
     d["min"] = score[0]
     d["max"] = score[-1]
     d["mean"] = sum(score) / len(score)
