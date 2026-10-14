@@ -3,14 +3,14 @@ def binary_search(items, target):
     Find the index of the target in the sorted list items using binary search.
     If the target is not found, return -1.
    """
-    l = 0
-    r = len(items) - 1
-    while l <= r:
-        mid = (l + r) // 2
+    left = 0
+    right = len(items) - 1
+    while left <= right:
+        mid = (left + right) // 2
         if items[mid] == target:
             return mid
         elif items[mid] < target:
-            l = mid + 1
+            left = mid + 1
         else:
-            r = mid - 1
+            right = mid - 1
     return -1
