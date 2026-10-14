@@ -10,7 +10,8 @@ def word_count(text: str) -> dict[str, int]:
     return result
 
 def top_k(text: str, k: int) -> list[tuple[str, int]]:
-    if k <= 0: return []
+    if k <= 0: 
+        return []
     result = list(word_count(text).items())
     result.sort(key=lambda e: (-e[1], e[0]))
     return result[:k]
