@@ -40,7 +40,7 @@ this list at the same time without merge conflicts.
 
 - **3 · Đức Huy:** @… → `members/…/`
 
-- **4 · Thông:** @… → `members/…/`
+- **4 · Thông:** @vbthg → `members/vbthg/`
 
 - **5 · THA Anh:** @hoanganhtu0922 → `members/hoanganhtu0922/`
 
