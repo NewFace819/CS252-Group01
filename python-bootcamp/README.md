@@ -36,9 +36,9 @@ this list at the same time without merge conflicts.
 
 - **1 · Hải:** @NewFace819 → `members/newface819/`
 
-- **2 · Đỗ Huy:** @… → `members/…/`
+- **2 · Đỗ Huy:** @wiih0521 → `members/wiih0521/`
 
-- **3 · Đức Huy:** @… → `members/…/`
+- **3 · Đức Huy:** @npdwuy → `members/npdwuy/`
 
 - **4 · Thông:** @… → `members/…/`
 
