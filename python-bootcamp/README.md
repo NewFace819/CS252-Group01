@@ -42,7 +42,7 @@ this list at the same time without merge conflicts.
 
 - **4 · Thông:** @… → `members/…/`
 
-- **5 · THA Anh:** @… → `members/…/`
+- **5 · THA Anh:** @hoanganhtu0922 → `members/hoanganhtu0922/`
 
 ## Week 1 to-do (every member)
 
