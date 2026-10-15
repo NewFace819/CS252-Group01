@@ -15,3 +15,24 @@ jobs:
       - run: pip install pytest ruff
       - run: ruff check python-bootcamp
       - run: pytest -q python-bootcamp
+
+  # Instructor tests skip everything without --member, so run them once per member.
+  w1-members:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {member: newface819, variant: 1}
+          - {member: wiih0521, variant: 2}
+          - {member: npdwuy, variant: 3}
+          - {member: vbthg, variant: 4}
+          # No instructor test for variant 5 (gcd): skip W1-4, own tests run in the bootcamp job.
+          - {member: hoanganhtu0922, variant: 5, extra: "-k 'not test_w1_4'"}
+    name: w1 (${{ matrix.member }})
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install pytest
+      - run: pytest -q python-bootcamp/tests/test_w1.py --member ${{ matrix.member }} --variant ${{ matrix.variant }} ${{ matrix.extra }}
