@@ -1,0 +1,10 @@
+# Lint settings for the Python bootcamp (T-W1, Đức Huy).
+# CI runs `ruff check python-bootcamp`; this file pins the rules so every
+# machine gets the same result, whatever ruff config it has globally.
+
+target-version = "py312"
+line-length = 100
+
+[lint]
+# Ruff defaults: E4/E7/E9 (imports, statements, syntax) + F (pyflakes)
+select = ["E4", "E7", "E9", "F"]
