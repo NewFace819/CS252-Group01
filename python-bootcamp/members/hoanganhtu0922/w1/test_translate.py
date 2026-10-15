@@ -8,7 +8,7 @@ bootcamp_dir = Path(__file__).resolve().parents[3]
 if str(bootcamp_dir) not in sys.path:
     sys.path.insert(0, str(bootcamp_dir))
 
-from members.hoanganhtu0922.w1.translate import gcd
+from members.hoanganhtu0922.w1.translate import gcd  # noqa: E402
 
 
 def test_gcd_positive():
