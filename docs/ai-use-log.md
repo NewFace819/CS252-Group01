@@ -14,3 +14,4 @@ This log tracks generative AI usage across team members for all Python Bootcamp 
 | Date | Member | Tool / Model | Task / File | Purpose & Prompt Summary | AI Code Kept? | PR / Commit |
 |------|--------|--------------|-------------|--------------------------|---------------|-------------|
 | 2026-10-14 | hoanganhtu0922 | Antigravity AI | W1-4 translate.py / test_translate.py | Clarified difference between Python tuple unpacking and C++ std::swap in Euclid's algorithm | Yes (docstrings and unit test cases) | PR #16 |
+| 2026-10-15 | vbthg | OpenAI Codex | W1 implementation and documentation | Codex hỗ trợ tạo phần triển khai W1 và tài liệu; giữ code trong PR #10. Đã kiểm tra bằng test W1, Ruff và CI. | Yes (W1 implementation in PR #10) | [#10](https://github.com/NewFace819/CS252-Group01/pull/10) |
