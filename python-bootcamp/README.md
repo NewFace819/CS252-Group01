@@ -64,6 +64,50 @@ this list at the same time without merge conflicts.
 Week 1 is done when all five `py-w1` PRs are merged with approval, CI is green, `PROGRESS.md` has five
 rows, and Hải has pushed the tag `py-w1-done` (p. 61).
 
+## Team and Week 2 assignments
+
+Hải assigns the W2-4 testers and the T-W2 tasks (Section 18.6). Your tester writes the W2-4 tests for
+your W1-4 function and also reviews your `py-w2` PR. No pair repeats a Week 1 review pair.
+
+| No. | Member | W2-4: tests the W1-4 of | Your `py-w2` PR is reviewed by | T-W2 team task (own PR) | Your T-W2 PR is reviewed by |
+|-----|--------|-------------------------|--------------------------------|-------------------------|-----------------------------|
+| 1 | Hải (leader) | Thông — `primes_up_to` | Đức Huy | `shared/contract.py`; setup (this section, `pytest.ini`, CI) | all four (contract), Đỗ Huy (setup) |
+| 2 | Đỗ Huy | THA Anh — `gcd` | Thông | `study_planner/parse.py` | Đức Huy |
+| 3 | Đức Huy | Hải — `binary_search` | THA Anh | `study_planner/prioritise.py` | Thông |
+| 4 | Thông | Đỗ Huy — `insertion_sort` | Hải | `study_planner/allocate.py` | THA Anh |
+| 5 | THA Anh | Đức Huy — `transpose` | Đỗ Huy | `study_planner/render.py` | Hải |
+
+Each module is reviewed by the member whose module uses its output; Hải reviews `render.py` because
+Hải wires the modules together in T-W3.
+
+**T-W2 merge order:** the setup PR first (CI needs `pytest.ini`), then the contract PR, approved by all
+four other members, then the four module PRs in any order. The individual exercises do not need the
+contract, so start them right away.
+
+## Week 2 to-do (every member)
+
+1. Open your homework issue: **New issue → Python homework**, title `py-w2: <username>`, labels
+   `python-hw` + `w2`, milestone `PY-W2`, assigned to yourself.
+2. Review and approve the contract PR as soon as it is open.
+3. From an up-to-date `main`, create `py/w2-<github-username>` and write W2-1, W2-2, W2-3, W2-5 and
+   W2-4 **yourself** in `members/<your_folder>/w2/`. Commit after each exercise — at least 5 commits,
+   spread over several days.
+4. Run the tests, push, and open the PR `py-w2: <username>` with `Closes #<issue>`, requesting the
+   reviewer in your row. If your tester's W2-4 tests fail on your W1-4 code, answer in their PR: fix
+   your code, or explain why the test is wrong.
+5. After the contract is merged: from an up-to-date `main`, create `team/w2-<module>` (for example
+   `team/w2-parse`), write your module and `shared/study_planner/test_<module>.py`, and open the PR
+   `T-W2: <module>.py`. Build `Task` and `Block` objects directly in your tests; do not import a
+   teammate's module.
+6. Review the PRs assigned to you (at least one Question, one Suggestion and one Praise).
+7. After your PRs are merged: pull `main`, then add your W2 row to `PROGRESS.md` (and any AI use to
+   `docs/ai-use-log.md`) in a small follow-up PR. Keep these two files out of your `py-w2` PR: five
+   people adding rows at the same time conflict.
+
+Week 2 is done when all five `py-w2` PRs are merged with approval, the contract PR shows approvals from
+all four other members, the four module PRs are merged with tests, CI is green, and Hải has pushed the
+tag `py-w2-done` (p. 63). Deadline: Friday 22:00 (milestone `PY-W2`).
+
 ## Layout
 
 ```
@@ -71,6 +115,7 @@ python-bootcamp/
 ├── README.md            # this file (Hải, T-W1)
 ├── PROGRESS.md          # one row per member per week (Thông, T-W1)
 ├── ruff.toml            # lint settings (Đức Huy, T-W1)
+├── pytest.ini           # also collects W2-4 tests_for_*.py files (Hải, T-W2)
 ├── members/             # one folder per member: GitHub username, lower case, - → _
 │   ├── newface819/      # Hải
 │   │   └── w1/  w2/  w3/
@@ -116,6 +161,32 @@ The tests import `members.<your_folder>.w1.<module>`, so these names must match 
 | W1-4 | `translate.py` | your variant from the team table — plus a docstring |
 | W1-5 | `timetable.py` | `by_day(pairs)` |
 
+## Week 2 file and function names
+
+The tests import `members.<your_folder>.w2.<module>`, so these names must match exactly.
+
+| Exercise | File in `members/<your_folder>/w2/` | Contents |
+|----------|-------------------------------------|----------|
+| W2-1 | `models.py` | `Task` dataclass: `title`, `importance` (1–5, else `ValueError`), `effort_h`, `deadline: date`; `days_left(today)`, never below 0 |
+| W2-2 | `io_utils.py` | `load_tasks(path)`, `save_json(tasks, path)`; an invalid row raises `ValueError` naming its line (the header is line 1) |
+| W2-3 | `errors.py` | `InfeasiblePlan(Exception)` with `needed_h`, `available_h` and a clear `__str__`; `check_feasible(tasks, available_h)` |
+| W2-4 | `tests_for_<reviewee_folder>.py` | at least five pytest tests for your reviewee's W1-4, including one edge case the instructor's tests miss |
+| W2-5 | `__init__.py`, `__main__.py` | `python -m members.<your_folder>.w2`, run from `python-bootcamp/`, loads `samples/tasks.csv` and prints the tasks |
+
+`pytest.ini` runs the tests in importlib mode, so a test file imports what it tests by its full path,
+for example `from members.vbthg.w1.translate import primes_up_to`. `python -m` runs a package's
+`__main__.py`; `__init__.py` alone is not enough.
+
+The T-W2 modules go in `shared/study_planner/`. `shared/contract.py` defines `Task` and `Block` and
+describes what each function must do.
+
+| Module | Function | Tests |
+|--------|----------|-------|
+| `parse.py` | `parse_csv(path) -> list[Task]` | `test_parse.py` |
+| `prioritise.py` | `prioritise(tasks, today) -> list[Task]` | `test_prioritise.py` |
+| `allocate.py` | `allocate(tasks, hours) -> list[Block]` | `test_allocate.py` |
+| `render.py` | `render(blocks) -> str` | `test_render.py` |
+
 ## How to run the tests
 
 Install the tools once:
@@ -136,6 +207,14 @@ THA Anh (Member 5): the instructor's W1-4 test has no variant 5, so skip it and 
 ```bash
 pytest -q python-bootcamp/tests/test_w1.py --member <your_folder> --variant 5 -k "not test_w1_4"
 pytest -q python-bootcamp/members/<your_folder>/w1
+```
+
+Week 2 has no `--variant`. The second command runs your W2-4 tests, the third your W2-5 package:
+
+```bash
+pytest -q python-bootcamp/tests/test_w2.py --member <your_folder>
+pytest -q python-bootcamp/members/<your_folder>/w2
+cd python-bootcamp && python -m members.<your_folder>.w2
 ```
 
 Run what CI runs before you push:
