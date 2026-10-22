@@ -36,3 +36,28 @@ jobs:
         with: {python-version: "3.12"}
       - run: pip install pytest
       - run: pytest -q python-bootcamp/tests/test_w1.py --member ${{ matrix.member }} --variant ${{ matrix.variant }} ${{ matrix.extra }}
+
+  # Same for W2. A member whose W2 is not in the checkout yet is skipped, so other PRs stay green.
+  w2-members:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        member: [newface819, wiih0521, npdwuy, vbthg, hoanganhtu0922]
+    name: w2 (${{ matrix.member }})
+    env:
+      W2: python-bootcamp/members/${{ matrix.member }}/w2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.12"}
+      - run: pip install pytest
+      - name: W2-1 .. W2-3 instructor tests
+        run: |
+          if [ ! -f "$W2/models.py" ]; then echo "No W2 for ${{ matrix.member }} yet, skipping."; exit 0; fi
+          pytest -q python-bootcamp/tests/test_w2.py --member ${{ matrix.member }}
+      # W2-5 has no instructor test: check that the package runs.
+      - name: W2-5 python -m members.${{ matrix.member }}.w2
+        run: |
+          if [ ! -f "$W2/__main__.py" ]; then echo "No W2-5 for ${{ matrix.member }} yet, skipping."; exit 0; fi
+          cd python-bootcamp && python -m members.${{ matrix.member }}.w2
