@@ -1,6 +1,6 @@
 """Unit tests for W1-4 translate.py (gcd variant)."""
 
-from translate import gcd
+from members.hoanganhtu0922.w1.translate import gcd
 
 
 def test_gcd_positive():
