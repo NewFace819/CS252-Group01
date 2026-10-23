@@ -66,6 +66,53 @@ def test_importance_zero(tmp_path):
         parse_csv(csv)
 
 
+def test_missing_columns(tmp_path):
+    """A row with fewer columns than expected raises ValueError with line number."""
+    csv = tmp_path / "missing_cols.csv"
+    csv.write_text(
+        "title,importance,effort_h,deadline\nStudy,3\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="line 2"):
+        parse_csv(csv)
+
+
+def test_extra_columns(tmp_path):
+    """A row with extra unexpected columns raises ValueError with line number."""
+    csv = tmp_path / "extra_cols.csv"
+    csv.write_text(
+        "title,importance,effort_h,deadline\nStudy,3,1,2026-10-30,bonus\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="line 2"):
+        parse_csv(csv)
+
+
+def test_blank_line_preserves_physical_line_number(tmp_path):
+    """A blank line before an invalid row must not throw off the physical line count."""
+    csv = tmp_path / "with_blank.csv"
+    csv.write_text(
+        "title,importance,effort_h,deadline\n\nStudy,bad,1,2026-10-30\n",
+        encoding="utf-8",
+    )
+    with pytest.raises(ValueError, match="line 3"):
+        parse_csv(csv)
+
+
+def test_multiline_field_reports_correct_line(tmp_path):
+    """A multiline quoted field shifts the physical line position accurately."""
+    csv = tmp_path / "multiline.csv"
+    csv.write_text(
+        'title,importance,effort_h,deadline\n"Study\nMore",3,1,2026-10-30\nBad,high,1,2026-10-30\n',
+        encoding="utf-8",
+    )
+    # Header is line 1.
+    # "Study\nMore" spans lines 2 and 3.
+    # Bad row is on line 4.
+    with pytest.raises(ValueError, match="line 4"):
+        parse_csv(csv)
+
+
 # ── Edge cases ────────────────────────────────────────────────────────
 
 
@@ -77,6 +124,14 @@ def test_empty_csv(tmp_path):
         encoding="utf-8",
     )
     assert parse_csv(csv) == []
+
+
+def test_zero_byte_file(tmp_path):
+    """A completely empty file (0 bytes) raises ValueError for line 1."""
+    csv = tmp_path / "zero_bytes.csv"
+    csv.write_text("", encoding="utf-8")
+    with pytest.raises(ValueError, match="line 1"):
+        parse_csv(csv)
 
 
 def test_bad_header(tmp_path):

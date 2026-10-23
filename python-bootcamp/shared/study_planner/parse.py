@@ -38,9 +38,12 @@ def parse_csv(path: str | Path) -> list[Task]:
     expected_header = ["title", "importance", "effort_h", "deadline"]
     with open(path, encoding="utf-8", newline="") as fh:
         reader = csv.DictReader(fh)
-        if reader.fieldnames != expected_header:
+        if reader.fieldnames is None or reader.fieldnames != expected_header:
             raise ValueError(f"line 1: header must be {','.join(expected_header)}")
-        for line_no, row in enumerate(reader, start=2):
+        for row in reader:
+            line_no = reader.line_num
+            if None in row or any(row.get(col) is None for col in expected_header):
+                raise ValueError(f"line {line_no}: invalid number of columns")
             try:
                 importance = int(row["importance"])
                 if not 1 <= importance <= 5:
@@ -53,7 +56,7 @@ def parse_csv(path: str | Path) -> list[Task]:
                     effort_h=float(row["effort_h"]),
                     deadline=date.fromisoformat(row["deadline"]),
                 )
-            except (ValueError, KeyError) as exc:
+            except (ValueError, KeyError, TypeError) as exc:
                 msg = f"line {line_no}: {exc}"
                 raise ValueError(msg) from exc
             tasks.append(task)
