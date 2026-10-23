@@ -19,4 +19,6 @@ This log tracks generative AI usage across team members for all Python Bootcamp 
 | 2026-10-16 | NewFace819 | Claude (Anthropic) | PROGRESS.md, docs/ai-use-log.md | Prepared my W1 PROGRESS row and these log entries; drafted my review notes for #16 and #17 | No (docs only) | branch `docs/w1-newface819-progress` |
 | 2026-10-14 | wiih0521 | Antigravity AI | W1-1 .. W1-5 | Guided exercise implementation, docstrings, and ruff lint checks | Yes (code in PR #14) | [#14](https://github.com/NewFace819/CS252-Group01/pull/14) |
 | 2026-10-22 | NewFace819 | Claude (Anthropic) | T-W2 setup (pytest.ini, ci.yml w2 job, README Week 2), shared/contract.py | Planned the W2 split and assignments with me; found that pytest skips `tests_for_*.py` and that five `w2/` packages clash, and tested the `pytest.ini` fix; drafted the files and PR descriptions, which I reviewed | Yes (pytest.ini, CI job, README text, contract docstring) | branches `chore/t-w2-setup`, `team/w2-contract` |
+| 2026-10-22 | hoanganhtu0922 | Antigravity AI | W2 docstrings, tests_for_npdwuy.py | Suggested edge-case test ideas for matrix transpose (W2-4) and checked docstring formatting. | Yes (docstrings and test cases) | [#27](https://github.com/NewFace819/CS252-Group01/pull/27) |
+
 
