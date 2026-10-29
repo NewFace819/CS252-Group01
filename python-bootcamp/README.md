@@ -108,6 +108,68 @@ Week 2 is done when all five `py-w2` PRs are merged with approval, the contract 
 all four other members, the four module PRs are merged with tests, CI is green, and Hải has pushed the
 tag `py-w2-done` (p. 63). Deadline: Friday 22:00 (milestone `PY-W2`).
 
+## Team and Week 3 assignments
+
+Week 3 follows Section 18.7. The reviewer rotation is "Week C"; with five members we continue the
+offsets used before (W1 = +1, W2 = +2, W3 = +3), so no pair repeats a Week 1 or Week 2 review pair.
+
+| No. | Member | Your `py-w3` PR is reviewed by | You review |
+|-----|--------|--------------------------------|------------|
+| 1 | Hải (leader) | Thông | Đức Huy |
+| 2 | Đỗ Huy | THA Anh | Thông |
+| 3 | Đức Huy | Hải | THA Anh |
+| 4 | Thông | Đỗ Huy | Hải |
+| 5 | THA Anh | Đức Huy | Đỗ Huy |
+
+### T-W3: integrate the study planner
+
+Section 18.7 gives Member 1 the `__main__.py` task; the other tasks were drawn at random. Member 5 has
+no task in the book (it lists four), so the render rounding fix is an extra. Each T-W3 PR is reviewed
+by the next member in the rotation and titled `T-W3: <task>`.
+
+| Task | Owner |
+|------|-------|
+| `shared/study_planner/__main__.py` calls `parse_csv → prioritise → allocate → render` | Hải |
+| End-to-end test with a sample CSV | Thông |
+| Error handling: missing file, empty file, infeasible plan (reuse `InfeasiblePlan`) | THA Anh |
+| `shared/study_planner/README.md` and a short demo in `docs/` | Đức Huy |
+| Extra: fix the `:.1f` rounding in `render.py` and remove the `xfail` | Đỗ Huy |
+
+Merge order: `__main__.py` first, then the end-to-end test and error handling, then the README/demo and
+the rounding fix. The CLI must run from a fresh clone:
+
+```bash
+python -m shared.study_planner samples/tasks.csv --hours 2
+```
+
+## Week 3 to-do (every member)
+
+1. Open your homework issue: **New issue → Python homework**, title `py-w3: <username>`, labels
+   `python-hw` + `w3`, milestone `PY-W3`, assigned to yourself.
+2. From an up-to-date `main`, create `py/w3-<github-username>` and write W3-1 … W3-4 **yourself** in
+   `members/<your_folder>/w3/`. Commit after each exercise — at least 5 commits, spread over several days.
+3. Run the tests, push, and open the PR `py-w3: <username>` with `Closes #<issue>`, requesting the
+   reviewer in your row.
+4. Do your T-W3 task from `main` on a branch `team/w3-<task>`, and review the PRs assigned to you (at
+   least one Question, one Suggestion and one Praise).
+5. After your PRs are merged: add your W3 row to `PROGRESS.md` (and any AI use to `docs/ai-use-log.md`)
+   in a small follow-up PR, not in your `py-w3` PR.
+
+| Exercise | File in `members/<your_folder>/w3/` | Contents |
+|----------|-------------------------------------|----------|
+| W3-1 | `dates.py` | `parse_due(text, today) -> date`: `2026-10-30`, `tomorrow`, `in 3 days`, weekday names like `Fri` (next occurrence); otherwise `ValueError` |
+| W3-2 | `log_stats.py` | `analyse(pairs) -> dict` over `(route, latency_ms)`: `counts` (`Counter`), `p95` per route, `slowest` route |
+| W3-3 | `cli.py` | `python -m members.<your_folder>.w3.cli tasks.csv --hours 2 [--today YYYY-MM-DD]`; exit code 1 with a clear message if the file is missing |
+| W3-4 | all your bootcamp files | type hints on every function, `ruff check` clean, docstrings; three lines in the PR on the Python feature most different from C++ |
+
+```bash
+pytest -q python-bootcamp/tests/test_w3.py --member <your_folder>
+```
+
+Week 3 is done when all five `py-w3` PRs are merged with approval, the T-W3 PRs are merged, the CLI runs
+from a fresh clone, the end-to-end test passes in CI, and Hải has pushed the tag `py-w3-done`
+(p. 63).
+
 ## Layout
 
 ```
