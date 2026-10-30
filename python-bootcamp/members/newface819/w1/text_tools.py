@@ -1,4 +1,4 @@
-def word_count(text):
+def word_count(text: str) -> dict[str, int]:
     """
     Count how many times each word appears in text.
     Words are lower-cased and the punctuation .,!?;: is ignored.
@@ -17,7 +17,7 @@ def word_count(text):
 
 
 
-def top_k(text, k):
+def top_k(text: str, k: int) -> list[tuple[str, int]]:
     """
     Return the k most frequent words in text as (word, count) pairs.
     Words with the same count are sorted alphabetically.
