@@ -1,3 +1,4 @@
+"""W3-2: request counts, p95 latency and the slowest route of a chat log."""
 import math
 from collections import Counter, defaultdict
 

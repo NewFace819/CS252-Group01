@@ -1,3 +1,4 @@
+"""W2-1: the Task dataclass."""
 from dataclasses import dataclass
 from datetime import date
 
@@ -11,7 +12,8 @@ class Task:
     effort_h: float
     deadline: date
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
+        """Reject an importance outside 1-5 with ValueError."""
         if not 1 <= self.importance <= 5:
             raise ValueError(f"importance must be 1-5, got {self.importance}")
 

@@ -1,3 +1,4 @@
+"""W3-1: read due dates such as "tomorrow", "in 3 days" or "Fri"."""
 import re
 from datetime import date, timedelta
 
