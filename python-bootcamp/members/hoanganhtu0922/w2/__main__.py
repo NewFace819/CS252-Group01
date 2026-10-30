@@ -11,6 +11,7 @@ _SAMPLES = Path(__file__).parent.parent.parent.parent / "samples" / "tasks.csv"
 
 
 def main() -> None:
+    """Load the sample CSV and print every task."""
     tasks = load_tasks(_SAMPLES)
     print(f"Loaded {len(tasks)} task(s) from {_SAMPLES.name}:\n")
     for task in tasks:
