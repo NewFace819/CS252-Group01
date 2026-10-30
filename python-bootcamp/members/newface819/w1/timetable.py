@@ -1,4 +1,4 @@
-def by_day(pairs):
+def by_day(pairs: list[tuple[str, str]]) -> dict[str, list[str]]:
     """
     Group the course codes in (course, day) pairs by day.
     The course codes of each day are sorted.
