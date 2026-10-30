@@ -1,11 +1,11 @@
-def can_register_thesis(credits, gpa):
+﻿def can_register_thesis(credits: int, gpa: float) -> bool:
     """
     Return True if the student has at least 120 credits and a GPA of at least 2.0.
     """
     return credits >= 120 and gpa >= 2.0
 
 
-def missing(credits, gpa) -> list[str]:
+def missing(credits: int, gpa: float) -> list[str]:
     """
     Return what the student still needs to register for the thesis.
     Return an empty list if the student can already register.

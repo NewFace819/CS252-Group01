@@ -1,3 +1,4 @@
+"""W2-2: load tasks from CSV and save them as JSON."""
 import csv
 import json
 from dataclasses import asdict
@@ -7,12 +8,12 @@ from pathlib import Path
 from members.npdwuy.w2.models import Task
 
 
-def load_tasks(path) -> list[Task]:
+def load_tasks(path: str | Path) -> list[Task]:
     """Read tasks from a CSV with header title,importance,effort_h,deadline.
 
     A bad row raises ValueError naming its line; the header is line 1.
     """
-    tasks = []
+    tasks: list[Task] = []
     with open(path, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
         for line, row in enumerate(reader, start=2):
@@ -28,7 +29,7 @@ def load_tasks(path) -> list[Task]:
     return tasks
 
 
-def save_json(tasks: list[Task], path) -> None:
+def save_json(tasks: list[Task], path: str | Path) -> None:
     """Write the tasks as a JSON list, with each deadline as YYYY-MM-DD."""
     data = []
     for t in tasks:

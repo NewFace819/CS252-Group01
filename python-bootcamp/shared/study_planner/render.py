@@ -25,7 +25,9 @@ def render(blocks: list[Block]) -> str:
     if not blocks:
         return "Nothing planned."
 
-    total = sum(b.hours for b in blocks)
+    # Use displayed hours so the header total exactly equals the sum of line hours
+    shown_hours = [float(f"{b.hours:.1f}") for b in blocks]
+    total = sum(shown_hours)
     lines: list[str] = [f"Tonight ({total:.1f} h):"]
 
     for i, block in enumerate(blocks, start=1):
