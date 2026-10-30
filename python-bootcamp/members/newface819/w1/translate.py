@@ -1,4 +1,4 @@
-def binary_search(items, target):
+def binary_search(items: list[int], target: int) -> int:
     """
     Find the index of the target in the sorted list items using binary search.
     If the target is not found, return -1.

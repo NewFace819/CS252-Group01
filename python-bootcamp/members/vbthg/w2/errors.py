@@ -9,11 +9,13 @@ class InfeasiblePlan(Exception):
     """A plan requires more study hours than are available."""
 
     def __init__(self, needed_h: float, available_h: float) -> None:
+        """Keep both hour totals available to callers and error reports."""
         self.needed_h = needed_h
         self.available_h = available_h
         super().__init__(needed_h, available_h)
 
     def __str__(self) -> str:
+        """Explain the required and available hours in a readable message."""
         return (f"Plan needs {self.needed_h:g} h, "
                 f"but only {self.available_h:g} h are available.")
 
