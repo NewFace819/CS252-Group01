@@ -7,6 +7,7 @@ SAMPLE = Path(__file__).resolve().parents[3] / "samples" / "tasks.csv"
 
 
 def main() -> None:
+    """Load samples/tasks.csv and print one line per task."""
     tasks = load_tasks(SAMPLE)
     print(f"{len(tasks)} tasks from {SAMPLE.name}:")
     for i, t in enumerate(tasks, start=1):
