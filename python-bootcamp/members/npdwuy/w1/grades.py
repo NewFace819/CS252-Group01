@@ -1,4 +1,11 @@
-def summary(scores: list[float]) -> dict:
+"""W1-1: summary statistics for a list of scores."""
+
+
+def summary(scores: list[float]) -> dict[str, float]:
+    """Return {"min", "max", "mean", "median"} of scores, mean and median rounded to 2 places.
+
+    Raises ValueError for an empty list.
+    """
     n = len(scores)
     if n == 0:
         raise ValueError("The scores list is empty.")
