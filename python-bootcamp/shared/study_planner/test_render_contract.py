@@ -3,8 +3,6 @@ T-W2: render() checked against shared/contract.py (Hải, paired with THA Anh on
 """
 from datetime import date
 
-import pytest
-
 from shared.contract import Block, Task
 from shared.study_planner.render import render
 
@@ -43,8 +41,6 @@ def test_header_is_the_sum_of_block_hours():
     assert render([block("A", 1), block("B", 2.5), block("C", 0.5)]).startswith("Tonight (4.0 h):")
 
 
-@pytest.mark.xfail(reason="known: :.1f rounds 2.25 to 2.2 but 0.75 to 0.8 (review on #35); fix planned in W3",
-                   strict=True)
 def test_header_matches_the_lines_with_quarter_hours():
     lines = render([block("Assignment", 1.5), block("DS exam", 0.75)]).splitlines()
     shown = [float(line.split()[-2]) for line in lines[1:]]
